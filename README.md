@@ -204,7 +204,8 @@ Dos aplicaciones Docker independientes, cada una con su `Dockerfile`:
 
 1. **Backend.** Nueva aplicación → repositorio `isjuandev/vectorlab`, rama `main`, *Build Pack*: Dockerfile,
    *Base Directory*: `/backend`. Variables de entorno:
-   - `VECTORLAB_CORS_ORIGINS` = `["https://<dominio-del-frontend>"]` (obligatorio; por defecto solo localhost).
+   - `VECTORLAB_CORS_ORIGINS` = `https://<dominio-del-frontend>` (obligatorio; por defecto solo localhost).
+     Admite una URL, varias separadas por comas o JSON (`["https://a","https://b"]`).
    - Opcional: `VECTORLAB_JOB_TTL_HOURS`, `VECTORLAB_MAX_UPLOAD_MB`, etc. (ver `backend/.env.example`).
    - Añadir un *Persistent Storage* con destino `/data/jobs` para conservar los trabajos entre redespliegues.
    - Dominio: por ejemplo `https://api.<dominio>` con puerto `8000`.

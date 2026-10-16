@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import json
 from functools import lru_cache
 from pathlib import Path
+from typing import Annotated
 
-from pydantic import Field
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field, field_validator
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
@@ -34,7 +36,18 @@ class Settings(BaseSettings):
     max_candidate_budget: int = Field(default=4, ge=1, le=4)
 
     # CORS restringido al frontend local; nunca "*".
-    cors_origins: list[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    # Acepta JSON (["https://a"]) o una lista separada por comas (https://a,https://b).
+    cors_origins: Annotated[list[str], NoDecode] = ["http://localhost:3000", "http://127.0.0.1:3000"]
+
+    @field_validator("cors_origins", mode="before")
+    @classmethod
+    def _parse_cors_origins(cls, value: object) -> object:
+        if isinstance(value, str):
+            text = value.strip()
+            if text.startswith("["):
+                return json.loads(text)
+            return [origin.strip() for origin in text.split(",") if origin.strip()]
+        return value
 
     @property
     def max_upload_bytes(self) -> int:
