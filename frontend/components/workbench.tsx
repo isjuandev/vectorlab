@@ -182,7 +182,7 @@ export function Workbench() {
               </div>
             )}
             {downloading && <p className="text-xs text-muted-foreground" data-testid="downloading">Descargando…</p>}
-            {downloadError && <p role="alert" className="text-xs text-red-600">{downloadError}</p>}
+            {downloadError && <p role="alert" className="text-xs text-red-400">{downloadError}</p>}
             {phase.kind === "cancelled" && <p className="text-xs text-muted-foreground">El trabajo se canceló y sus archivos temporales se eliminaron.</p>}
           </section>
 
