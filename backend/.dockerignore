@@ -1,0 +1,9 @@
+# Solo se envía al contexto de Docker lo que la imagen necesita.
+*
+!app
+!requirements.txt
+
+**/__pycache__
+**/*.pyc
+.env
+.env.*

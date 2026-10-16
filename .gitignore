@@ -1,0 +1,25 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/next-env.d.ts
+frontend/test-results/
+frontend/playwright-report/
+*.tsbuildinfo
+
+# Datos generados (trabajos, PoC, evaluaciones, capturas E2E)
+output/
+
+# Imágenes reales del usuario: pueden tener derechos de autor
+samples/real/
+
+# Entorno local
+.env
+.env.local
+.DS_Store
